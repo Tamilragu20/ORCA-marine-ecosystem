@@ -1,0 +1,88 @@
+{
+  "best_model_name": "Gradient Boosting",
+  "features": [
+    "depth",
+    "temperature",
+    "salinity",
+    "chlorophyll",
+    "phosphate",
+    "nitrate",
+    "silicate",
+    "temp_depth_gradient",
+    "sigma_theta_proxy",
+    "np_ratio",
+    "primary_productivity_proxy",
+    "seasonal_sin",
+    "seasonal_cos",
+    "species_richness",
+    "shannon_diversity",
+    "latitude",
+    "longitude"
+  ],
+  "classes": {
+    "0": "Healthy",
+    "1": "Moderate Stress",
+    "2": "High Stress"
+  },
+  "feature_importances": {
+    "phosphate": 0.4715,
+    "sigma_theta_proxy": 0.3468,
+    "nitrate": 0.059,
+    "salinity": 0.0474,
+    "temp_depth_gradient": 0.0265,
+    "temperature": 0.0094,
+    "longitude": 0.0093,
+    "silicate": 0.009,
+    "latitude": 0.0061,
+    "np_ratio": 0.0047,
+    "chlorophyll": 0.0026,
+    "depth": 0.0018,
+    "primary_productivity_proxy": 0.0018,
+    "seasonal_sin": 0.0017,
+    "seasonal_cos": 0.0015,
+    "species_richness": 0.0005,
+    "shannon_diversity": 0.0004
+  },
+  "model_comparison": {
+    "Logistic Regression": {
+      "cv_macro_f1_mean": 0.9598,
+      "cv_macro_f1_std": 0.0016,
+      "test_accuracy": 0.9567,
+      "test_precision": 0.9594,
+      "test_recall": 0.9533,
+      "test_f1": 0.9561,
+      "test_roc_auc": 0.9951
+    },
+    "Decision Tree": {
+      "cv_macro_f1_mean": 0.958,
+      "cv_macro_f1_std": 0.0042,
+      "test_accuracy": 0.9449,
+      "test_precision": 0.9511,
+      "test_recall": 0.9414,
+      "test_f1": 0.9456,
+      "test_roc_auc": 0.9849
+    },
+    "Random Forest": {
+      "cv_macro_f1_mean": 0.9668,
+      "cv_macro_f1_std": 0.0036,
+      "test_accuracy": 0.9526,
+      "test_precision": 0.9576,
+      "test_recall": 0.9481,
+      "test_f1": 0.9522,
+      "test_roc_auc": 0.9966
+    },
+    "Gradient Boosting": {
+      "cv_macro_f1_mean": 0.969,
+      "cv_macro_f1_std": 0.0035,
+      "test_accuracy": 0.9544,
+      "test_precision": 0.9594,
+      "test_recall": 0.9501,
+      "test_f1": 0.9542,
+      "test_roc_auc": 0.9965
+    }
+  },
+  "training_samples": 17049,
+  "test_samples": 5678,
+  "target_col": "ecosystem_condition",
+  "random_state": 42
+}

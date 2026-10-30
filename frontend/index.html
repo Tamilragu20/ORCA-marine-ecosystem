@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORCA — Marine Ecosystem Reasoning with Collaborative Agents</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Leaflet.js Mapping CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <!-- ORCA Ocean Theme Styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Left Sidebar Navigation -->
+  <nav id="sidebar">
+    <div class="brand-container">
+      <div class="brand-logo">
+        <i class="fa-solid fa-water text-white" style="font-size:18px;"></i>
+      </div>
+      <div class="brand-text">
+        <h1>ORCA</h1>
+        <p>Marine Multi-Agent AI</p>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+          <i class="fa-solid fa-compass"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#analysis" class="nav-link" data-section="analysis">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Ecosystem Analysis</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#map" class="nav-link" data-section="map">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>Interactive Map</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#agents" class="nav-link" data-section="agents">
+          <i class="fa-solid fa-users-gear"></i>
+          <span>Agent Insights</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#prediction" class="nav-link" data-section="prediction">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>ML Prediction</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#biodiversity" class="nav-link" data-section="biodiversity">
+          <i class="fa-solid fa-fish-fins"></i>
+          <span>Biodiversity</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#trends" class="nav-link" data-section="trends">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <span>Ocean Trends</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#risk" class="nav-link" data-section="risk">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Risk Analysis</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#reports" class="nav-link" data-section="reports">
+          <i class="fa-solid fa-file-contract"></i>
+          <span>Assessment Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#sources" class="nav-link" data-section="sources">
+          <i class="fa-solid fa-database"></i>
+          <span>Data Sources</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="system-status-indicator">
+        <div class="status-pulse"></div>
+        <span>ORCA Systems Active</span>
+      </div>
+      <div style="font-size:10px; color:#64748b; margin-top:4px;">NOAA & OBIS Ingestion Online</div>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main id="app-main">
+    
+    <!-- Top Sticky Header -->
+    <header class="top-navbar">
+      <div class="top-nav-title">
+        <i class="fa-solid fa-layer-group" style="color:var(--accent-cyan)"></i>
+        <span>Marine Ecosystem Reasoning Platform</span>
+      </div>
+      <div class="top-nav-actions">
+        <span class="badge badge-info"><i class="fa-solid fa-shield-halved"></i> Epistemic Demarcation</span>
+        <button class="orca-btn btn-primary" onclick="switchSection('analysis')">
+          <i class="fa-solid fa-play"></i> Run Analysis
+        </button>
+      </div>
+    </header>
+
+    <div class="content-container">
+
+      <!-- ========================================================= -->
+      <!-- SECTION 1: DASHBOARD -->
+      <!-- ========================================================= -->
+      <section id="section-dashboard" class="app-section">
+        <!-- Banner -->
+        <div class="orca-card" style="margin-bottom:24px; background:linear-gradient(135deg, rgba(6,182,212,0.1), rgba(11,21,40,0.8));">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h2 style="font-size:22px; font-weight:700; color:#fff; margin-bottom:6px;">
+                California Current Marine Ecosystem Overview
+              </h2>
+              <p style="font-size:13px; color:var(--text-muted); max-width:700px;">
+                ORCA coordinates 7 collaborative AI agents evaluating empirical hydrography from NOAA/Scripps CalCOFI and marine biodiversity from UNESCO/IOC OBIS.
+              </p>
+            </div>
+            <div>
+              <span class="badge badge-optimal" style="padding:8px 14px; font-size:12px;">
+                <i class="fa-solid fa-circle-check"></i> Real Ocean Data Validated
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid-4">
+          <div class="orca-card kpi-card">
+            <div class="kpi-label">Ecosystem Condition</div>
+            <div class="kpi-value" id="dash-ecosystem-status" style="color:var(--accent-emerald);">Optimal / Healthy</div>
+            <div class="kpi-sub"><i class="fa-solid fa-wave-square"></i> Multi-Agent Consensus</div>
+          </div>
+          <div class="orca-card kpi-card">
+            <div class="kpi-label">ML Model Prediction</div>
+            <div class="kpi-value" id="dash-ml-prediction" style="color:var(--accent-sky);">Healthy</div>
+            <div class="kpi-sub"><i class="fa-solid fa-brain"></i> Gradient Boosting (95.4% Test Acc)</div>
+          </div>
+          <div class="orca-card kpi-card">
+            <div class="kpi-label">Ecological Risk Level</div>
+            <div class="kpi-value" id="dash-risk-level" style="color:var(--accent-teal);">LOW</div>
+            <div class="kpi-sub"><i class="fa-solid fa-shield"></i> Multi-Stressor Synthesis</div>
+          </div>
+          <div class="orca-card kpi-card">
+            <div class="kpi-label">Cataloged Species</div>
+            <div class="kpi-value" id="dash-species-richness" style="color:var(--accent-amber);">22</div>
+            <div class="kpi-sub"><i class="fa-solid fa-fish"></i> UNESCO OBIS Occurrences</div>
+          </div>
+        </div>
+
+        <!-- Visual Multi-Agent Reasoning Pipeline Track -->
+        <div class="orca-card" style="margin-bottom:24px;">
+          <div class="orca-card-header">
+            <div class="orca-card-title">
+              <i class="fa-solid fa-network-wired" style="color:var(--accent-cyan);"></i>
+              ORCA Reasoning & Collaboration Pipeline
+            </div>
+            <span class="badge badge-info">7 Collaborative Agents</span>
+          </div>
+
+          <div class="pipeline-track">
+            <div class="pipeline-node completed" id="node-step-1" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-droplet"></i></div>
+              <div class="node-label">Water Quality</div>
+              <div class="node-sub">1.2 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-2" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-fish-fins"></i></div>
+              <div class="node-label">Biodiversity</div>
+              <div class="node-sub">28.4 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-3" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-seedling"></i></div>
+              <div class="node-label">Productivity</div>
+              <div class="node-sub">0.4 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-4" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-robot"></i></div>
+              <div class="node-label">ML Analysis</div>
+              <div class="node-sub">16.1 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-5" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div class="node-label">Risk Analysis</div>
+              <div class="node-sub">0.3 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-6" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="node-label">Coordinator</div>
+              <div class="node-sub">0.5 ms</div>
+            </div>
+            <div class="pipeline-node completed" id="node-step-7" onclick="switchSection('agents')">
+              <div class="node-icon-circle"><i class="fa-solid fa-file-lines"></i></div>
+              <div class="node-label">Report Agent</div>
+              <div class="node-sub">1.1 ms</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Section: Key Indicators & Quick Analysis -->
+        <div class="grid-2">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title">
+                <i class="fa-solid fa-microscope" style="color:var(--accent-sky)"></i>
+                Key Oceanographic Indicators
+              </div>
+            </div>
+            <table class="orca-table">
+              <thead>
+                <tr>
+                  <th>Indicator</th>
+                  <th>Observed Baseline</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Dissolved Oxygen</b></td>
+                  <td>5.80 ml/L (Normoxic)</td>
+                  <td><span class="badge badge-optimal">OPTIMAL</span></td>
+                </tr>
+                <tr>
+                  <td><b>Sea Surface Temperature</b></td>
+                  <td>14.8 °C (Temperate)</td>
+                  <td><span class="badge badge-optimal">NORMAL</span></td>
+                </tr>
+                <tr>
+                  <td><b>Practical Salinity</b></td>
+                  <td>33.45 PSU</td>
+                  <td><span class="badge badge-optimal">NOMINAL</span></td>
+                </tr>
+                <tr>
+                  <td><b>Chlorophyll-a</b></td>
+                  <td>1.85 μg/L (Mesotrophic)</td>
+                  <td><span class="badge badge-optimal">BALANCED</span></td>
+                </tr>
+                <tr>
+                  <td><b>Nitrate to Phosphate (N:P)</b></td>
+                  <td>12.4 : 1 (Redfield 16:1)</td>
+                  <td><span class="badge badge-optimal">BALANCED</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title">
+                <i class="fa-solid fa-circle-nodes" style="color:var(--accent-emerald)"></i>
+                Epistemic Demarcation & Reasoning Safety
+              </div>
+            </div>
+            <div style="font-size:12.5px; line-height:1.6; color:#cbd5e1;">
+              <p style="margin-bottom:10px;">
+                <b style="color:var(--accent-cyan)">Pillar 1 — Observed Data:</b> Real sensor readings from NOAA/Scripps CalCOFI bottles and UNESCO OBIS observations.
+              </p>
+              <p style="margin-bottom:10px;">
+                <b style="color:var(--accent-sky)">Pillar 2 — ML Prediction:</b> Gradient Boosting classification and Isolation Forest anomaly scores representing statistical boundaries.
+              </p>
+              <p style="margin-bottom:10px;">
+                <b style="color:var(--accent-teal)">Pillar 3 — Agent Heuristics:</b> Specialized domain reasoning evaluating hypoxia thresholds (< 2.0 ml/L) and stoichiometry.
+              </p>
+              <p>
+                <b style="color:var(--accent-amber)">Pillar 4 — Uncertainty:</b> Transparent disclosure of observational constraints without assuming unverified causation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 2: ECOSYSTEM ANALYSIS -->
+      <!-- ========================================================= -->
+      <section id="section-analysis" class="app-section" style="display:none;">
+        <div class="orca-card" style="margin-bottom:20px;">
+          <div class="orca-card-header">
+            <div>
+              <div class="orca-card-title"><i class="fa-solid fa-sliders" style="color:var(--accent-cyan)"></i> In-Situ Oceanographic Parameter Control</div>
+              <div class="orca-card-subtitle">Choose a pre-calibrated scenario or input custom hydrographic measurements.</div>
+            </div>
+            <div>
+              <span class="badge badge-info">Interactive Laboratory Mode</span>
+            </div>
+          </div>
+
+          <!-- Scenario Pills -->
+          <div style="margin-bottom:16px;">
+            <span style="font-size:12px; color:var(--text-muted); margin-right:10px; font-weight:600;">PRESETS:</span>
+            <div id="preset-container" style="display:inline-block;"></div>
+          </div>
+
+          <!-- Input Parameters Grid -->
+          <div class="grid-4" style="margin-bottom:18px;">
+            <div class="form-group">
+              <label class="form-label"><span>Depth (m)</span></label>
+              <input type="number" id="input-depth" class="form-control" value="15.0" step="1.0">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Temperature (°C)</span></label>
+              <input type="number" id="input-temperature" class="form-control" value="14.8" step="0.1">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Salinity (PSU)</span></label>
+              <input type="number" id="input-salinity" class="form-control" value="33.45" step="0.05">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Dissolved O2 (ml/L)</span></label>
+              <input type="number" id="input-dissolved_oxygen" class="form-control" value="6.20" step="0.05">
+            </div>
+          </div>
+
+          <div class="grid-4" style="margin-bottom:18px;">
+            <div class="form-group">
+              <label class="form-label"><span>Chlorophyll-a (μg/L)</span></label>
+              <input type="number" id="input-chlorophyll" class="form-control" value="1.85" step="0.1">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Nitrate (μmol/L)</span></label>
+              <input type="number" id="input-nitrate" class="form-control" value="5.20" step="0.1">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Phosphate (μmol/L)</span></label>
+              <input type="number" id="input-phosphate" class="form-control" value="0.55" step="0.05">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Silicate (μmol/L)</span></label>
+              <input type="number" id="input-silicate" class="form-control" value="6.50" step="0.1">
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="form-group">
+              <label class="form-label"><span>Latitude (°N)</span></label>
+              <input type="number" id="input-latitude" class="form-control" value="34.25" step="0.05">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Longitude (°W)</span></label>
+              <input type="number" id="input-longitude" class="form-control" value="-119.85" step="0.05">
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span>Month (1-12)</span></label>
+              <input type="number" id="input-month" class="form-control" value="5" min="1" max="12">
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-subtle); padding-top:16px;">
+            <div>
+              <label for="csv-file-upload" class="orca-btn btn-secondary" style="cursor:pointer;">
+                <i class="fa-solid fa-file-csv"></i> Upload CSV Dataset
+              </label>
+              <input type="file" id="csv-file-upload" accept=".csv" style="display:none;">
+              <span id="upload-status-msg" style="font-size:12px; margin-left:12px;"></span>
+            </div>
+
+            <div style="display:flex; gap:12px;">
+              <button id="btn-run-pipeline" class="orca-btn btn-primary" style="padding:10px 24px;">
+                <i class="fa-solid fa-play"></i> Run ORCA Reasoning Pipeline
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Analysis Results -->
+        <div class="grid-2">
+          <!-- Final Assessment Summary -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-award" style="color:var(--accent-cyan)"></i> Final Ecosystem Assessment</div>
+              <span id="analysis-final-assessment" class="badge badge-healthy">Optimal / Healthy</span>
+            </div>
+            <div style="display:flex; gap:20px; margin-bottom:14px;">
+              <div>
+                <div style="font-size:11px; color:#64748b;">STATISTICAL CONFIDENCE</div>
+                <div id="analysis-confidence-val" style="font-size:22px; font-weight:700; color:#38bdf8;">100.0%</div>
+              </div>
+              <div>
+                <div style="font-size:11px; color:#64748b;">EXECUTION TIME</div>
+                <div id="analysis-exec-time" style="font-size:22px; font-weight:700; color:#10b981;">48.2 ms</div>
+              </div>
+            </div>
+
+            <h4 style="font-size:13px; color:#fff; margin-bottom:10px;">Collaborative Reasoning Chain:</h4>
+            <ol id="reasoning-steps-list" style="margin-left:18px; color:#cbd5e1;"></ol>
+          </div>
+
+          <!-- Specialized Agent Findings -->
+          <div>
+            <div id="agent-findings-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 3: INTERACTIVE MAP -->
+      <!-- ========================================================= -->
+      <section id="section-map" class="app-section" style="display:none;">
+        <div class="orca-card">
+          <div class="orca-card-header">
+            <div>
+              <div class="orca-card-title"><i class="fa-solid fa-map" style="color:var(--accent-cyan)"></i> California Current Marine Hydrographic Map</div>
+              <div class="orca-card-subtitle">Showing verified NOAA/Scripps CalCOFI stations & OBIS biodiversity hotspots. Click any station to inspect.</div>
+            </div>
+            <div>
+              <span class="badge badge-optimal">● Healthy</span>
+              <span class="badge badge-warning" style="margin:0 4px;">● Moderate Stress</span>
+              <span class="badge badge-critical">● Hypoxic Dead-Zone</span>
+            </div>
+          </div>
+          
+          <div id="marine-map"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 4: AGENT INSIGHTS -->
+      <!-- ========================================================= -->
+      <section id="section-agents" class="app-section" style="display:none;">
+        <div class="orca-card" style="margin-bottom:20px;">
+          <div class="orca-card-title"><i class="fa-solid fa-network-wired" style="color:var(--accent-cyan)"></i> ORCA Multi-Agent Architecture</div>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+            ORCA implements 7 specialized agents communicating through standardized JSON findings. No single agent makes an unvetted decision.
+          </p>
+        </div>
+
+        <div class="grid-3" id="agents-cards-grid">
+          <!-- Water Quality Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-droplet" style="color:var(--accent-sky)"></i> Water Quality Agent</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">Physical & chemical oceanography: temperature, salinity, oxygen, and nutrient stoichiometry.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>In-situ dissolved oxygen saturation deficit</li>
+              <li>Potential density anomaly proxy</li>
+              <li>Redfield N:P ratio verification</li>
+            </ul>
+          </div>
+
+          <!-- Biodiversity Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-fish-fins" style="color:var(--accent-emerald)"></i> Biodiversity Agent</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">Community ecology: real marine occurrences from the UNESCO/IOC OBIS database.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>Species richness per 0.25° grid</li>
+              <li>Shannon-Wiener diversity index</li>
+              <li>Faunal hypoxia avoidance risk</li>
+            </ul>
+          </div>
+
+          <!-- Ocean Productivity Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-seedling" style="color:var(--accent-teal)"></i> Productivity Agent</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">Phytoplankton dynamics, chlorophyll-a concentration, and primary productivity depth proxies.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>Trophic state classification</li>
+              <li>Phaeopigment senescence ratio</li>
+              <li>Euphotic light attenuation model</li>
+            </ul>
+          </div>
+
+          <!-- ML Analysis Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-robot" style="color:var(--accent-blue)"></i> ML Analysis Agent</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">Supervised Gradient Boosting classification and Isolation Forest anomaly detection.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>17-feature hydrographic inference</li>
+              <li>Class probability estimation</li>
+              <li>Local feature attribution</li>
+            </ul>
+          </div>
+
+          <!-- Risk Analysis Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-amber)"></i> Risk Analysis Agent</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">Multi-stressor synthesis: integrates hypoxia, marine heatwaves, and bloom collapse risks.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>Compound risk score (0-1)</li>
+              <li>Dead-zone threat isolation</li>
+              <li>Evidence vs interpretation demarcation</li>
+            </ul>
+          </div>
+
+          <!-- Coordinator Reasoning Agent -->
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-scale-balanced" style="color:var(--accent-cyan)"></i> Reasoning Coordinator</div>
+              <span class="badge badge-optimal">ACTIVE</span>
+            </div>
+            <p style="font-size:12px; color:#cbd5e1; margin-bottom:10px;">The central arbiter resolving cross-agent signal conflicts and synthesizing assessments.</p>
+            <ul style="font-size:11.5px; color:#94a3b8; margin-left:16px; line-height:1.5;">
+              <li>Consensus & conflict resolution</li>
+              <li>4-Pillar epistemic demarcation</li>
+              <li>Deterministic scientific reasoning</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 5: ML PREDICTION -->
+      <!-- ========================================================= -->
+      <section id="section-prediction" class="app-section" style="display:none;">
+        <div class="grid-2">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-chart-column" style="color:var(--accent-sky)"></i> Posterior Class Probabilities</div>
+            </div>
+            <div style="height:280px;">
+              <canvas id="chart-ml-probabilities"></canvas>
+            </div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-microchip" style="color:var(--accent-emerald)"></i> Model Performance Benchmarks</div>
+            </div>
+            <table class="orca-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>5-Fold F1</th>
+                  <th>Test Acc</th>
+                  <th>ROC-AUC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background:rgba(6,182,212,0.1); font-weight:600;">
+                  <td>Gradient Boosting (Champion)</td>
+                  <td>0.9690</td>
+                  <td>95.44%</td>
+                  <td>0.9965</td>
+                </tr>
+                <tr>
+                  <td>Random Forest (150 trees)</td>
+                  <td>0.9668</td>
+                  <td>95.26%</td>
+                  <td>0.9966</td>
+                </tr>
+                <tr>
+                  <td>Logistic Regression (scaled)</td>
+                  <td>0.9598</td>
+                  <td>95.67%</td>
+                  <td>0.9951</td>
+                </tr>
+                <tr>
+                  <td>Decision Tree (depth=8)</td>
+                  <td>0.9580</td>
+                  <td>94.49%</td>
+                  <td>0.9849</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 6: BIODIVERSITY -->
+      <!-- ========================================================= -->
+      <section id="section-biodiversity" class="app-section" style="display:none;">
+        <div class="grid-2">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-chart-pie" style="color:var(--accent-cyan)"></i> Taxonomic Phyla Distribution (OBIS)</div>
+            </div>
+            <div style="height:300px;">
+              <canvas id="chart-phyla-breakdown"></canvas>
+            </div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-book-bookmark" style="color:var(--accent-emerald)"></i> California Current Biological Census</div>
+            </div>
+            <div style="max-height:300px; overflow-y:auto;">
+              <table class="orca-table">
+                <thead>
+                  <tr>
+                    <th>Species Name</th>
+                    <th>Phylum</th>
+                    <th>Class</th>
+                    <th>Depth</th>
+                    <th>Coordinates</th>
+                  </tr>
+                </thead>
+                <tbody id="species-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 7: OCEAN TRENDS -->
+      <!-- ========================================================= -->
+      <section id="section-trends" class="app-section" style="display:none;">
+        <div class="grid-2">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-temperature-half" style="color:#f43f5e"></i> Mean Annual Water Temperature (°C)</div>
+            </div>
+            <div style="height:250px;"><canvas id="chart-temperature-trend"></canvas></div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-lungs" style="color:#06b6d4"></i> Mean Annual Dissolved Oxygen (ml/L)</div>
+            </div>
+            <div style="height:250px;"><canvas id="chart-oxygen-trend"></canvas></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-leaf" style="color:#10b981"></i> Mean Annual Chlorophyll-a (μg/L)</div>
+            </div>
+            <div style="height:250px;"><canvas id="chart-chlorophyll-trend"></canvas></div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-shield-virus" style="color:#f59e0b"></i> Mean Ecological Stress Index (0-1)</div>
+            </div>
+            <div style="height:250px;"><canvas id="chart-stress-trend"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 8: RISK ANALYSIS -->
+      <!-- ========================================================= -->
+      <section id="section-risk" class="app-section" style="display:none;">
+        <div class="grid-3">
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-triangle-exclamation" style="color:#f43f5e"></i> Hypoxia Risk Vector</div>
+              <span class="badge badge-optimal">MONITORED</span>
+            </div>
+            <p style="font-size:12.5px; color:#cbd5e1; margin-bottom:12px;">Threshold: DO &lt; 2.0 ml/L constitutes physiological asphyxiation for marine fauna.</p>
+            <div style="font-size:11.5px; color:#94a3b8;">Calibrated using Diaz & Rosenberg (2008) marine dead-zone standards.</div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-fire" style="color:#f59e0b"></i> Thermal Heatwave Risk</div>
+              <span class="badge badge-optimal">MONITORED</span>
+            </div>
+            <p style="font-size:12.5px; color:#cbd5e1; margin-bottom:12px;">Threshold: Surface anomalies &gt; 2.5°C suppress vertical nutrient upwelling.</p>
+            <div style="font-size:11.5px; color:#94a3b8;">Calibrated against Hobday et al. (2016) marine heatwave categories.</div>
+          </div>
+
+          <div class="orca-card">
+            <div class="orca-card-header">
+              <div class="orca-card-title"><i class="fa-solid fa-bacteria" style="color:#10b981"></i> Bloom Senescence Risk</div>
+              <span class="badge badge-optimal">MONITORED</span>
+            </div>
+            <p style="font-size:12.5px; color:#cbd5e1; margin-bottom:12px;">Threshold: Chlorophyll &gt; 8.0 μg/L followed by deep bacterial oxygen draw-down.</p>
+            <div style="font-size:11.5px; color:#94a3b8;">Tracks post-bloom microbial respiration stress.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 9: ASSESSMENT REPORTS -->
+      <!-- ========================================================= -->
+      <section id="section-reports" class="app-section" style="display:none;">
+        <div class="orca-card" style="margin-bottom:20px;">
+          <div class="orca-card-header">
+            <div>
+              <div class="orca-card-title"><i class="fa-solid fa-file-contract" style="color:var(--accent-cyan)"></i> 14-Section Formal Assessment Report</div>
+              <div class="orca-card-subtitle">Generated automatically by the Executive Report Agent following multi-agent consensus.</div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="orca-btn btn-secondary" onclick="downloadReportMarkdown()">
+                <i class="fa-solid fa-download"></i> Download Markdown (.md)
+              </button>
+              <button class="orca-btn btn-primary" onclick="printReport()">
+                <i class="fa-solid fa-print"></i> Print / PDF
+              </button>
+            </div>
+          </div>
+
+          <div id="markdown-report-viewer" class="report-view-container">
+            <p>Run an analysis above to generate the full 14-section formal report.</p>
+          </div>
+        </div>
+
+        <!-- History of Past Sessions -->
+        <div class="orca-card">
+          <div class="orca-card-title" style="margin-bottom:14px;">
+            <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent-sky)"></i> Analysis Session Archive
+          </div>
+          <table class="orca-table">
+            <thead>
+              <tr>
+                <th>Session ID</th>
+                <th>Date</th>
+                <th>Station / Depth</th>
+                <th>Condition</th>
+                <th>Confidence</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="recent-reports-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- SECTION 10: DATA SOURCES -->
+      <!-- ========================================================= -->
+      <section id="section-sources" class="app-section" style="display:none;">
+        <div class="orca-card" style="margin-bottom:20px;">
+          <div class="orca-card-title"><i class="fa-solid fa-database" style="color:var(--accent-cyan)"></i> Official Scientific Data Provenance</div>
+          <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+            In strict compliance with academic standards, ORCA utilizes 100% verified, publicly accessible marine observations. No synthetic or invented data is used.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="orca-card">
+            <h3 style="font-size:16px; color:#fff; margin-bottom:10px;">
+              <i class="fa-solid fa-ship" style="color:var(--accent-sky)"></i> NOAA / Scripps CalCOFI Hydrographic Database
+            </h3>
+            <p style="font-size:12.5px; color:#cbd5e1; line-height:1.6; margin-bottom:12px;">
+              The California Cooperative Oceanic Fisheries Investigations (CalCOFI) is an official partnership between NOAA Fisheries, Scripps Institution of Oceanography, and California DFW.
+            </p>
+            <ul style="font-size:12px; color:#94a3b8; margin-left:18px; line-height:1.6;">
+              <li><b>Timeframe:</b> 2000–2021 (Modern multi-sensor suite)</li>
+              <li><b>Variables:</b> Depth, Temperature, Salinity, Dissolved Oxygen, Chlorophyll-a, Nitrate, Phosphate, Silicate</li>
+              <li><b>URL:</b> <a href="https://calcofi.org/downloads/database/" target="_blank" style="color:var(--accent-sky)">calcofi.org/downloads/database/</a></li>
+            </ul>
+          </div>
+
+          <div class="orca-card">
+            <h3 style="font-size:16px; color:#fff; margin-bottom:10px;">
+              <i class="fa-solid fa-dna" style="color:var(--accent-emerald)"></i> UNESCO / IOC Ocean Biodiversity Information System (OBIS)
+            </h3>
+            <p style="font-size:12.5px; color:#cbd5e1; line-height:1.6; margin-bottom:12px;">
+              OBIS is the global open-access marine biodiversity database coordinated by the Intergovernmental Oceanographic Commission of UNESCO.
+            </p>
+            <ul style="font-size:12px; color:#94a3b8; margin-left:18px; line-height:1.6;">
+              <li><b>Records:</b> 6,000 in-situ occurrences cataloged in the California Current study polygon</li>
+              <li><b>Taxonomy:</b> 360 distinct marine species across 24 distinct biological phyla</li>
+              <li><b>URL:</b> <a href="https://portal.obis.org/" target="_blank" style="color:var(--accent-emerald)">portal.obis.org/</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Application Controller Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

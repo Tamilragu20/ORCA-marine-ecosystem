@@ -1,0 +1,24 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Pytest & IDE
+.pytest_cache/
+.vscode/
+.idea/
+
+# Large Raw Archives & Temporary Files
+data/raw/*.zip
+data/raw/CalCOFI_Database_*
+database/*.db-journal
+
+# Logs
+*.log

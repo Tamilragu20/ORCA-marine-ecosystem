@@ -1,0 +1,21 @@
+{
+  "step": "data_validation_and_cleaning",
+  "timestamp": "2026-10-01T15:06:48.781915",
+  "calcofi": {
+    "raw_cast_count": 35644,
+    "total_raw_bottles": 895371,
+    "modern_bottles_matched": 166895,
+    "initial_merged_records": 156368,
+    "post_validation_records": 153113,
+    "final_dataset_records": 25000
+  },
+  "obis": {
+    "raw_records": 6000,
+    "clean_records": 6000,
+    "unique_species": 360,
+    "unique_phyla": 24
+  },
+  "filtering_reasons": [
+    "Removed 3255 records failing oceanographic physical bounds check."
+  ]
+}
